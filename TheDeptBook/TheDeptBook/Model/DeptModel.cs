@@ -36,13 +36,10 @@ namespace TheDeptBook.Model
             }
             return debits;
         }
-        public double CalculateDept(List<string> deptor)
+        public double CalculateDept(string name)
         {
-            foreach (var name in deptor)
-            {
-               List<double> debits = GetDebits(name);
+            List<double> debits = GetDebits(name);
              
-            }
             return debits.Sum();
         }
    }
