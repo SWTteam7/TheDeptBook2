@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheDeptBook.ViewModel;
 
-namespace TheDeptBook.Model
+namespace TheDeptBook
 {
-   public class DeptModel
+   public interface INavigateService
    {
-      
-
+      void show(IViewModel viewModel);
    }
 }

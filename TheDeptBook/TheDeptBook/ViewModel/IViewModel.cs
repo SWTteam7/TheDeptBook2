@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TheDeptBook.Model
+namespace TheDeptBook.ViewModel
 {
-   public class DeptModel
-   {
-      
-
-   }
+    public interface IViewModel
+    {
+    }
 }

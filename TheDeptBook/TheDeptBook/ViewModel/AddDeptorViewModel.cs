@@ -11,13 +11,10 @@ using TheDeptBook.Model;
 
 namespace TheDeptBook.ViewModel
 {
-   class AddDeptorViewModel: INotifyPropertyChanged
+   public class AddDeptorViewModel: INotifyPropertyChanged,IViewModel
    {
       private DeptModel _deptModel;
-      public AddDeptorViewModel(DeptModel deptModel)
-      {
-         _deptModel = deptModel;
-      }
+      private INavigateService _navigate;
 
       public event PropertyChangedEventHandler PropertyChanged;
 
@@ -26,5 +23,12 @@ namespace TheDeptBook.ViewModel
       {
          PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
       }
-   }
+
+
+      public AddDeptorViewModel(DeptModel deptModel, INavigateService nav)
+      {
+         _deptModel = deptModel;
+         _navigate = nav;
+      }
+}
 }

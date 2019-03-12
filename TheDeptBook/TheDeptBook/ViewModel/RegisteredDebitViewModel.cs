@@ -10,12 +10,14 @@ using TheDeptBook.Model;
 
 namespace TheDeptBook.ViewModel
 {
-   class RegisteredDebitViewModel: INotifyPropertyChanged
+   public class RegisteredDebitViewModel: INotifyPropertyChanged,IViewModel
    {
       private DeptModel _deptModel;
-      public RegisteredDebitViewModel(DeptModel deptModel)
+      private INavigateService _navigate;
+      public RegisteredDebitViewModel(DeptModel deptModel,INavigateService nav)
       {
          _deptModel = deptModel;
+         _navigate = nav;
       }
 
       public event PropertyChangedEventHandler PropertyChanged;

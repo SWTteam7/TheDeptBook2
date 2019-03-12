@@ -10,19 +10,23 @@ namespace TheDeptBook
 {
    public class ViewModelLocater
    {
+      public ViewModelLocater()
+      {
+
+      }
       public MainWindowViewModel MainWindowViewModel
       {
-         get { return new MainWindowViewModel(new DeptModel());}
+         get { return new MainWindowViewModel(new DeptModel(),new NavigateService());}
       }
 
-      public AddDeptorViewModel AddDeptorViewModel
-      {
-         get { return new AddDeptorViewModel(new DeptModel());}
-      }
+      //public AddDeptorViewModel AddDeptorViewModel
+      //{
+      //   get { return new AddDeptorViewModel(new DeptModel());}
+      //}
 
-      public RegisteredDebitViewModel RegisteredDebitViewModel
-      {
-         get { return new RegisteredDebitViewModel(new DeptModel());}
-      }
+      //public RegisteredDebitViewModel RegisteredDebitViewModel
+      //{
+      //   get { return new RegisteredDebitViewModel(new DeptModel());}
+      //}
    }
 }

@@ -54,6 +54,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="INavigateService.cs" />
+    <Compile Include="NavigateService.cs" />
     <Compile Include="ViewModelLocater.cs" />
     <Compile Include="Model\DeptModel.cs" />
     <Compile Include="Properties\Annotations.cs" />
@@ -61,6 +63,7 @@
       <DependentUpon>RegisteredDebits.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AddDeptorViewModel.cs" />
+    <Compile Include="ViewModel\IViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\RegisteredDebitViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
