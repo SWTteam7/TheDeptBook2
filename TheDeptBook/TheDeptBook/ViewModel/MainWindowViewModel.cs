@@ -13,8 +13,8 @@ namespace TheDeptBook.ViewModel
 {
    public class MainWindowViewModel : INotifyPropertyChanged,IViewModel
    {
-      private DeptModel _deptModel;
-      private INavigateService _navigationService;
+      private readonly DeptModel _deptModel;
+      private readonly INavigateService _navigationService;
 
       public event PropertyChangedEventHandler PropertyChanged;
 
@@ -34,14 +34,7 @@ namespace TheDeptBook.ViewModel
 
       public ICommand AddDeptorCommand
       {
-         get
-         {
-            if (_addDeptorCommand == null)
-            {
-               _addDeptorCommand = new RelayCommand(OpenAddDeptor);
-            }
-            return _addDeptorCommand;
-         }
+         get { return _addDeptorCommand ?? (_addDeptorCommand = new RelayCommand(OpenAddDeptor)); }
         
       }
 
@@ -51,6 +44,18 @@ namespace TheDeptBook.ViewModel
       }
 
 
+      private ICommand _registeredDebitCommand;
+
+      public ICommand RegisteredDebitCommand
+      {
+         get { return _registeredDebitCommand ?? (_registeredDebitCommand = new RelayCommand(OpenRegistredDebits)); }
+      }
+
+      private void OpenRegistredDebits()
+      {
+         _navigationService.show(new RegisteredDebitViewModel(_deptModel,_navigationService));
+      }
+
       private ICommand _showDepts;
 
       //public ICommand ShowDepts()
@@ -58,7 +63,10 @@ namespace TheDeptBook.ViewModel
 
       //}
 
-      
+      public string Title { get; set; }
+
+      public List<Tuple<string, double, DateTime>> Deptors { get; set; }
+
 
    }
 }

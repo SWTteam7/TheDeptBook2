@@ -14,9 +14,15 @@ namespace TheDeptBook
          if (viewModel is AddDeptorViewModel)
          {
             AddDeptor view = new AddDeptor();
-            
+            view.DataContext = viewModel;
             view.Show();
-         }   
+         }
+         else if (viewModel is RegisteredDebitViewModel)
+         {
+            RegisteredDebits view = new RegisteredDebits();
+            view.DataContext = viewModel;
+            view.Show();
+         }
       }
    }
 }
