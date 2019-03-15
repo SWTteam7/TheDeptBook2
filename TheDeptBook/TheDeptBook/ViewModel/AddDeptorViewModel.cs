@@ -30,5 +30,15 @@ namespace TheDeptBook.ViewModel
          _deptModel = deptModel;
          _navigate = nav;
       }
+
+      public void Add(string name, double debit)
+      {
+          _deptModel.AddNewDebit(name,debit);
+      }
+
+      public void Save()
+      {
+          //pas?
+      }
 }
 }

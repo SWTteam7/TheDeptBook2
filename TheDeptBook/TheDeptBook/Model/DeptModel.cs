@@ -7,40 +7,62 @@ using System.Threading.Tasks;
 
 namespace TheDeptBook.Model
 {
-   public class DeptModel
-   {    
+    public class DeptModel
+    {
         public string Name { get; set; }
-        public double Debit { get; set; }
-        public DateTime Date{ get; set; }
+        public double Debit { get;  set; }
 
-        private List<double> debits;
-        private List<Tuple<string, double, DateTime>> deptors;
+        public Dictionary<string, List<double>> Depts { get; set; }
+        public List<string> Deptors { get; private set; }
 
-        public void AddNewDeptor(string name, double debit)
+        public DeptModel()
         {
-            DateTime date = DateTime.Now;
-            
-            Tuple<string, double, DateTime> deptor = new Tuple<string, double, DateTime>(name, debit,date);
-
-            deptors.Add(deptor);
+            Deptors = new List<string>();
+            Depts = new Dictionary<string, List<double>>();
         }
 
-        public List<double> GetDebits(string name)
-        { 
-            foreach(var item in deptors)
+        public void AddNewDeptor(string name)
+        {
+
+            string deptor = name;
+
+            Deptors.Add(deptor);
+            Depts.Add(deptor, new List<double>());
+        }
+
+        public void AddNewDebit(string name, double debit)
+        {
+            List<double> deptlist;
+            Depts.TryGetValue(name, out deptlist);
+            deptlist.Add(debit);
+        }
+
+        public double GetDebits(string name)
+        {
+            double totaldebits = 0;
+            List<double> deptlist;
+            Depts.TryGetValue(name, out deptlist);
+            foreach (var dept in deptlist)
             {
-                if (item.Item1 == name)
-                {
-                   debits.Add(item.Item2);
-                }
+                totaldebits += dept;
             }
-            return debits;
+            return totaldebits;
         }
-        public double CalculateDept(string name)
+
+        public string GetDeptor(string name)
         {
-            List<double> debits = GetDebits(name);
-             
-            return debits.Sum();
+            string wanteddeptor = "";
+            foreach (var deptor in Deptors)
+            {
+                if (deptor == name)
+                {
+                    wanteddeptor = deptor;
+                }
+                else
+                    wanteddeptor = "The wanted deptor was not found";
+            }
+            return wanteddeptor;
+
         }
-   }
+    }
 }

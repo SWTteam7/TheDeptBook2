@@ -30,7 +30,36 @@ namespace TheDeptBook.ViewModel
          _navigationService = navService;
       }
 
-      private ICommand _addDeptorCommand;
+      public string Name
+      {
+          get => _deptModel.Name;
+          set
+          {
+              _deptModel.Name = value;
+              OnPropertyChanged();
+          }
+      }
+
+      public double Debit
+      {
+          get => _deptModel.Debit;
+          set
+          {
+              _deptModel.Debit = value;
+              OnPropertyChanged();
+          }
+      }
+
+      public Dictionary<string, List<double>> Depts
+      {
+          get => _deptModel.Depts;
+          set
+          {
+              _deptModel.Depts = value;
+              OnPropertyChanged();
+          }
+      }
+        private ICommand _addDeptorCommand;
 
       public ICommand AddDeptorCommand
       {
@@ -58,14 +87,21 @@ namespace TheDeptBook.ViewModel
 
       private ICommand _showDepts;
 
-      //public ICommand ShowDepts()
-      //{
+       public ICommand ShowDepts()
+       {
+         get { return _showDepts ?? (_showDepts = new RelayCommand(GetDepts)); } //ved ikke hvorfor det her ikke virker
 
-      //}
+       }
+       private void GetDepts()
+       {
+           
+           Depts =_deptModel.Depts; //det her tror jeg ikke virker for Depts er netop bare den liste???
+           OnPropertyChanged("Depts");
+       }
 
-      public string Title { get; set; }
+        public string Title { get; set; }
 
-      public List<Tuple<string, double, DateTime>> Deptors { get; set; }
+    
 
 
    }
