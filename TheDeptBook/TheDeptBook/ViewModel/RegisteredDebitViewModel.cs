@@ -64,7 +64,7 @@ namespace TheDeptBook.ViewModel
             DebitsToShow.Clear();
          }
 
-         foreach (DebitObject debit in Deptor.DebtList)
+         foreach (DebitObject debit in Deptor.DebitList)
          {
             DebitsToShow.Add(debit);
          }
@@ -109,7 +109,7 @@ namespace TheDeptBook.ViewModel
 
       private void CloseAddDeptor()
       {
-         _navigate.close(this);
+         _navigate.Close(this);
       }
    }
 }

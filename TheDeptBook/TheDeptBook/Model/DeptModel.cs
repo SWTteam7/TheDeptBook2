@@ -13,7 +13,7 @@ namespace TheDeptBook.Model
         public string Name { get; set; }
         public double Debit { get;  set; }
      
-        public List<string> DeptorsNames { get;  set; }
+  
         public List<DeptorObject> ListOfAllDeptors { get; set; }
 
         
@@ -22,14 +22,14 @@ namespace TheDeptBook.Model
 
         public DeptModel()
         {
-            DeptorsNames = new List<string>();
+            
             ListOfAllDeptors = new List<DeptorObject>();
         }
 
         public void AddNewDeptor(string name, double debit)
         {
 
-            DeptorsNames.Add(name);
+            
             DebitObject d = new DebitObject(DateTime.Now,debit);
             List<DebitObject> debitList = new List<DebitObject>();
             debitList.Add(d);
@@ -47,7 +47,7 @@ namespace TheDeptBook.Model
               if (deptor.Name == name)
               {
                  DebitObject d= new DebitObject(DateTime.Now, debit);
-                 deptor.DebtList.Add(d);
+                 deptor.DebitList.Add(d);
               }
            }
         }
@@ -62,7 +62,7 @@ namespace TheDeptBook.Model
                if (deptor.Name == name)
                {
                  
-                 foreach (DebitObject debit in deptor.DebtList)
+                 foreach (DebitObject debit in deptor.DebitList)
                  {
                     double debitAmount = debit.Debit;
                     totaldebits += debitAmount;

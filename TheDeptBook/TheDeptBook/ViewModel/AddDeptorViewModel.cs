@@ -102,7 +102,7 @@ namespace TheDeptBook.ViewModel
      
       private void CloseAddDeptor()
       {
-         _navigate.close(this);
+         _navigate.Close(this);
          Name = "";
          InitValue = 0.0;
       }

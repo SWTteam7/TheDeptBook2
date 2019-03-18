@@ -11,8 +11,7 @@ namespace TheDeptBook.Model
         string Name { get; set; }
         double Debit { get; set; }
 
-        
-        List<string> DeptorsNames { get; set; }
+       
         List<DeptorObject> ListOfAllDeptors { get; set; }
         
 

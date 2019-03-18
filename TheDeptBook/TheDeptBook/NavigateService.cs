@@ -12,7 +12,7 @@ namespace TheDeptBook
    {
       private AddDeptor _addDeptorView;
       private RegisteredDebits _registeredDebits;
-      public void show(IViewModel viewModel)
+      public void Show(IViewModel viewModel)
       {
          if (viewModel is AddDeptorViewModel)
          {
@@ -28,7 +28,7 @@ namespace TheDeptBook
          }
       }
 
-      public void close(IViewModel viewModel)
+      public void Close(IViewModel viewModel)
       {
          if (viewModel is AddDeptorViewModel)
          {
