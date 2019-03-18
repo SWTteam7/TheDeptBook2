@@ -26,7 +26,7 @@ namespace TheDeptBook.ViewModel
       }
 
 
-      public AddDeptorViewModel(DeptModel deptModel, INavigateService nav)
+      public AddDeptorViewModel(IDeptModel deptModel, INavigateService nav)
       {
          _deptModel = deptModel;
          _navigate = nav;
