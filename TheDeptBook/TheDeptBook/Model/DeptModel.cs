@@ -12,56 +12,73 @@ namespace TheDeptBook.Model
     {
         public string Name { get; set; }
         public double Debit { get;  set; }
-        public DateTime Date { get; set; }
+     
+        public List<string> DeptorsNames { get;  set; }
+        public List<DeptorObject> ListOfAllDeptors { get; set; }
 
-        public Dictionary<string, List<Dictionary<DateTime,double>>> Depts { get; set; }
-        public List<string> Deptors { get;  set; }
-
-        public List<Dictionary<string, double>> ListOfAllDeptors { get; set; }
+        
 
    
 
         public DeptModel()
         {
-            Deptors = new List<string>();
-            Depts = new Dictionary<string, List<Dictionary<DateTime,double>>>();
+            DeptorsNames = new List<string>();
+            ListOfAllDeptors = new List<DeptorObject>();
+           List<DebitObject> d = new List<DebitObject>();
+           d.Add(new DebitObject(DateTime.Now,12));
+           d.Add(new DebitObject(DateTime.Now,100));
+           ListOfAllDeptors.Add(new DeptorObject("Hans",d,0));
+           
         }
 
         public void AddNewDeptor(string name, double debit)
         {
 
-            string deptor = name;
+            DeptorsNames.Add(name);
+            DebitObject d = new DebitObject(DateTime.Now,debit);
+            List<DebitObject> debitList = new List<DebitObject>();
+            debitList.Add(d);
+           
+            DeptorObject deptor = new DeptorObject(name, debitList,0);
 
-            var list = new List<Dictionary<DateTime,double>>();
-            Deptors.Add(deptor);
-            list.Add(new Dictionary<DateTime, double>{{DateTime.Now,debit}});
-            Depts.Add(deptor, list);
-            
+            ListOfAllDeptors.Add(deptor);
       }
 
         public void AddNewDebit(string name, double debit)
-        {   
-            List<Dictionary<DateTime,double>> deptlist;
-            Depts.TryGetValue(name, out deptlist);
-            deptlist.Add(new Dictionary<DateTime, double>{{DateTime.Now, debit}});
+        {
+
+           foreach (DeptorObject deptor in ListOfAllDeptors)
+           {
+              if (deptor.Name == name)
+              {
+                 DebitObject d= new DebitObject(DateTime.Now, debit);
+                 deptor.DebtList.Add(d);
+              }
+           }
         }
 
-        public Dictionary<string, double> GetDeptorAndTotalDebit(string name)
+        public double GetTotalDebit(string name)
         {
-            double totaldebits = 0;
-            List<Dictionary<DateTime, double>> deptlist;
-            Depts.TryGetValue(name, out deptlist);
-            foreach (var dept in deptlist)
+           double totaldebits = 0.0;
+
+            foreach (DeptorObject deptor in ListOfAllDeptors)
             {
-                foreach (KeyValuePair<DateTime, double> date in dept)
-                {
-                    double debit = date.Value;
-                    totaldebits += debit;
-                }
+              
+               if (deptor.Name == name)
+               {
+                 
+                 foreach (DebitObject debit in deptor.DebtList)
+                 {
+                    double debitAmount = debit.Debit;
+                    totaldebits += debitAmount;
+                 }
+               }
             }
-            Dictionary<string, double> Deptor = new Dictionary<string, double>{{name,totaldebits}};
-            return Deptor;
+
+           return totaldebits;
         }
+
+       
 
         //public string GetDeptor(string name)
         //{
@@ -79,14 +96,5 @@ namespace TheDeptBook.Model
 
         //}
 
-       public void AllDeptors()
-       {
-          
-          foreach (var d in Deptors)
-          {
-
-             ListOfAllDeptors.Add(GetDeptorAndTotalDebit(d));
-          }
-       }
     }
 }

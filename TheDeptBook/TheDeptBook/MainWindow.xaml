@@ -6,34 +6,25 @@
         xmlns:local="clr-namespace:TheDeptBook"
         xmlns:viewModel="clr-namespace:TheDeptBook.ViewModel"
         mc:Ignorable="d"
+       
+        
         Title="The Dept Book" Height="450" Width="539"
         DataContext ="{Binding Source={StaticResource ViewModelLocater},Path=MainWindowViewModel}">
-
     <Grid>
         <Button x:Name="BtnAdd" Content="Add" HorizontalAlignment="Left" Margin="358,46,0,0" VerticalAlignment="Top" Width="113" Height="35" Command="{Binding AddDeptorCommand,Mode=OneTime}" />
         <Label x:Name="LabelDeptors" Content="Deptors" HorizontalAlignment="Left" Margin="50,20,0,0" VerticalAlignment="Top"/>
-        <Grid Margin="50,51,248,36">
-            <ListView x:Name="listView" HorizontalAlignment="Left" Height="332" VerticalAlignment="Top" Width="233" SelectedItem="{Binding SelctedItem}"
-                ItemsSource="{Binding Deptors}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="219">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="170*"/>
-                                <ColumnDefinition Width="49*"/>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0" VerticalAlignment="Top" Margin="10,0,0,0" Height="32">
-                                <TextBlock Text="{Binding Key}"  TextWrapping="NoWrap" HorizontalAlignment="Left"/>
-                            </StackPanel>
-                            <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="0,0,10,0" Height="32">
-                                <TextBlock Text="{Binding Value}"  TextWrapping="NoWrap" HorizontalAlignment="Right"/>
-                            </StackPanel>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
-        </Grid>
-
+        <Button x:Name="BtnViewDeptor" Content="View Deptor" HorizontalAlignment="Left" Margin="358,348,0,0" VerticalAlignment="Top" Width="113" Height="35" Command="{Binding RegisteredDebitCommand,Mode=OneTime}"/>
+        <Button x:Name="BtnUpdate" Content="Update List" HorizontalAlignment="Left" Margin="358,100,0,0" VerticalAlignment="Top" Width="113" Height="35" Command ="{Binding UpdateCommand,Mode = OneTime}"/>
+        <ListView x:Name="listView" HorizontalAlignment="Left" Height="337" Margin="10,46,0,0" VerticalAlignment="Top" Width="329" ItemsSource="{Binding Deptors}" SelectedIndex="{Binding Path=SelectedItem}">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Width="160" Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
+                        <GridViewColumn Width="160" Header="Total" DisplayMemberBinding="{Binding Path=TotalDebit}"/>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>
+

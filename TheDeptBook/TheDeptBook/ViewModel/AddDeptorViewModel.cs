@@ -59,8 +59,6 @@ namespace TheDeptBook.ViewModel
          }
       }
 
-      public DateTime time { get; private set; }
-
 
       private ICommand _saveDeptorCommand;
 
@@ -82,6 +80,7 @@ namespace TheDeptBook.ViewModel
       {
          _deptModel.AddNewDeptor(Name,InitValue);
          CloseAddDeptor();
+         
       }
 
       private ICommand _closeCommand;

@@ -17,7 +17,7 @@ namespace TheDeptBook.ViewModel
       private INavigateService _navigate;
       private string _selectedItem;
 
-      public RegisteredDebitViewModel(DeptModel deptModel,INavigateService nav, string selectedItem)
+      public RegisteredDebitViewModel(IDeptModel deptModel,INavigateService nav, string selectedItem)
       {
          _deptModel = deptModel;
          _navigate = nav;
@@ -42,15 +42,6 @@ namespace TheDeptBook.ViewModel
          }
       }
 
-      public DateTime Date
-      {
-          get => _deptModel.Date;
-          set
-          {
-              _deptModel.Date = value;
-              OnPropertyChanged();
-          }
-      }
 
       public double Debit
       {
@@ -62,15 +53,15 @@ namespace TheDeptBook.ViewModel
           }
       }
 
-      public Dictionary<string, List<Dictionary<DateTime,double>>> Depts
-      {
-          get => _deptModel.Depts;
-          set
-          {
-              _deptModel.Depts = value;
-              OnPropertyChanged();
-          }
-      }
+      //public DeptorObject Depts
+      //{
+      //    get => _deptModel.ListOfAllDeptors;
+      //    set
+      //    {
+      //        _deptModel.Depts = value;
+      //        OnPropertyChanged();
+      //    }
+      //}
 
       private ICommand _addDebitCommand;
 
@@ -92,16 +83,16 @@ namespace TheDeptBook.ViewModel
       public void AddValue()
       {
 
-         List<Dictionary<DateTime, double>> ListdateValue = new List<Dictionary<DateTime, double>>();
-         Dictionary<DateTime, double> dateValue=new Dictionary<DateTime, double>();
+         //List<Dictionary<DateTime, double>> ListdateValue = new List<Dictionary<DateTime, double>>();
+         //Dictionary<DateTime, double> dateValue=new Dictionary<DateTime, double>();
 
-          //get name fra der hvor der er klikket på main
-          _deptModel.AddNewDebit(Name, Debit);
+         // //get name fra der hvor der er klikket på main
+         // _deptModel.AddNewDebit(Name, Debit);
 
-         dateValue.Add(Date,Debit);
-         ListdateValue.Add(dateValue);
+         //dateValue.Add(Date,Debit);
+         //ListdateValue.Add(dateValue);
 
-         Depts.Add(Name,ListdateValue);
+         //Depts.Add(Name,ListdateValue);
       }
 
       private ICommand _closeCommand;

@@ -54,6 +54,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DebitObject.cs" />
+    <Compile Include="DeptorObject.cs" />
     <Compile Include="INavigateService.cs" />
     <Compile Include="Model\IDeptModel.cs" />
     <Compile Include="NavigateService.cs" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -15,6 +16,7 @@ namespace TheDeptBook.ViewModel
    {
       private readonly IDeptModel _deptModel;
       private readonly INavigateService _navigationService;
+      private ObservableCollection<DeptorObject> DeptorsToShow = new ObservableCollection<DeptorObject>();
      
 
       public event PropertyChangedEventHandler PropertyChanged;
@@ -29,47 +31,20 @@ namespace TheDeptBook.ViewModel
       {
          _deptModel = deptModel;
          _navigationService = navService;
-         Dictionary<string, double> dept=new Dictionary<string, double>();
-         dept.Add("Emma",25.0);
-         dept.Add("Christiane Nørkjær Svensen",-100);
-
          
-         List<Dictionary<string, double>> bla = new List<Dictionary<string, double>>();
-         bla.Add(dept);
-
-         Deptors = bla;
       }
 
-      public string Name
-      {
-          get => _deptModel.Name;
-          set
-          {
-              _deptModel.Name = value;
-              OnPropertyChanged();
-          }
-      }
 
-      public double Debit
+      public ObservableCollection<DeptorObject> Deptors
       {
-          get => _deptModel.Debit;
-          set
-          {
-              _deptModel.Debit = value;
-              OnPropertyChanged();
-          }
-      }
-
-      public List<Dictionary<string, double>> Deptors
-      {
-         get => _deptModel.ListOfAllDeptors;
+         get => DeptorsToShow;
          set
          {
-            _deptModel.ListOfAllDeptors = value;
-            OnPropertyChanged();
+            //DeptorsToShow = value;
+            //OnPropertyChanged();
          }
-
       }
+
 
       public string SelectedItem { get; set; }
       
@@ -101,23 +76,40 @@ namespace TheDeptBook.ViewModel
          _navigationService.show(new RegisteredDebitViewModel(_deptModel,_navigationService, SelectedItem));
       }
 
-      //private ICommand _showDepts;
+      private ICommand _updateCommand;
 
-      // public ICommand ShowDepts
-      // {
-      //   get {return _showDepts ?? (_showDepts = new RelayCommand(GetDepts));}
+      public ICommand UpdateCommand
+      {
+         get { return _updateCommand ?? (_updateCommand = new RelayCommand(UpdateList)); }
+      }
 
-      // }
-       private void GetDepts()
-       {
-           var Depts =_deptModel.Depts;
-           OnPropertyChanged("Depts");
-       }
+      private void UpdateList()
+      {
+         ShowDeptors();
+         
+        
+      }
 
-       
+      public void ShowDeptors()
+      {
+         if (DeptorsToShow != null)
+         {
+            DeptorsToShow.Clear();
+         }
 
-    
+         foreach (DeptorObject deptor in _deptModel.ListOfAllDeptors)
+         {
+            string name = deptor.Name;
+            List<DebitObject> debits = deptor.DebtList;
+            double totalDebit = _deptModel.GetTotalDebit(name);
 
+            DeptorObject d = new DeptorObject(name,debits, totalDebit);
 
+            DeptorsToShow.Add(d);
+         }
+         OnPropertyChanged("Deptors");
+
+        
+      }
    }
 }
