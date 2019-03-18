@@ -36,7 +36,7 @@ namespace TheDeptBook.ViewModel
       {
          get => _deptModel.Name;
          set
-         {
+        {
             if (value!=_deptModel.Name)
             {
                _deptModel.Name = value;
@@ -81,6 +81,7 @@ namespace TheDeptBook.ViewModel
       private void SaveDeptor()
       {
          _deptModel.AddNewDeptor(Name,InitValue);
+         CloseAddDeptor();
       }
 
       private ICommand _closeCommand;
@@ -99,9 +100,12 @@ namespace TheDeptBook.ViewModel
          }
       }
 
+     
       private void CloseAddDeptor()
       {
-         //_navigate.show();
+         _navigate.close(this);
+         Name = "";
+         InitValue = 0.0;
       }
 
    }

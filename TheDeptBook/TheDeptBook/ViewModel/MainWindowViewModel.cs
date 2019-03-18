@@ -15,6 +15,7 @@ namespace TheDeptBook.ViewModel
    {
       private readonly DeptModel _deptModel;
       private readonly INavigateService _navigationService;
+     
 
       public event PropertyChangedEventHandler PropertyChanged;
 
@@ -50,15 +51,36 @@ namespace TheDeptBook.ViewModel
           }
       }
 
-      public Dictionary<string, List<double>> Depts
+      public List<Dictionary<string, double>> Deptors
       {
-          get => _deptModel.Depts;
-          set
-          {
-              _deptModel.Depts = value;
-              OnPropertyChanged();
-          }
+         get => _deptModel.ListOfAllDeptors;
+         set
+         {
+            _deptModel.ListOfAllDeptors = value;
+            OnPropertyChanged();
+         }
+
       }
+
+      public Dictionary<string, List<double>> SelectedItem
+      {
+         get => _deptModel.Depts;
+         set
+         {
+            _deptModel.Depts = value;
+            OnPropertyChanged();
+         }
+      }
+
+      //public Dictionary<string, List<double>> Depts
+      //{
+      //    get => _deptModel.Depts;
+      //    set
+      //    {
+      //        _deptModel.Depts = value;
+      //        OnPropertyChanged();
+      //    }
+      //}
         private ICommand _addDeptorCommand;
 
       public ICommand AddDeptorCommand
@@ -85,21 +107,22 @@ namespace TheDeptBook.ViewModel
          _navigationService.show(new RegisteredDebitViewModel(_deptModel,_navigationService));
       }
 
-      private ICommand _showDepts;
+      //private ICommand _showDepts;
 
-       public ICommand ShowDepts()
-       {
-         get { return _showDepts ?? (_showDepts = new RelayCommand(GetDepts)); } //ved ikke hvorfor det her ikke virker
+      // public ICommand ShowDepts
+      // {
+      //   get {return _showDepts ?? (_showDepts = new RelayCommand(GetDepts));}
 
-       }
+      // }
        private void GetDepts()
        {
            
-           Depts =_deptModel.Depts; //det her tror jeg ikke virker for Depts er netop bare den liste???
+       
+           var Depts =_deptModel.Depts;
            OnPropertyChanged("Depts");
        }
 
-        public string Title { get; set; }
+       
 
     
 

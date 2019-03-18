@@ -15,20 +15,27 @@ namespace TheDeptBook.Model
         public Dictionary<string, List<double>> Depts { get; set; }
         public List<string> Deptors { get; private set; }
 
+       public List<Dictionary<string, double>> ListOfAllDeptors { get; set; }
+
+   
+
         public DeptModel()
         {
             Deptors = new List<string>();
             Depts = new Dictionary<string, List<double>>();
         }
 
-        public void AddNewDeptor(string name)
+        public void AddNewDeptor(string name, double debit)
         {
 
             string deptor = name;
 
+            var list = new List<double>();
             Deptors.Add(deptor);
-            Depts.Add(deptor, new List<double>());
-        }
+            list.Add(debit);
+            Depts.Add(deptor, list);
+           
+      }
 
         public void AddNewDebit(string name, double debit)
         {
@@ -37,7 +44,7 @@ namespace TheDeptBook.Model
             deptlist.Add(debit);
         }
 
-        public double GetDebits(string name)
+        public Dictionary<string,double> GetDeptorAnTotaldDebit(string name)
         {
             double totaldebits = 0;
             List<double> deptlist;
@@ -46,23 +53,35 @@ namespace TheDeptBook.Model
             {
                 totaldebits += dept;
             }
-            return totaldebits;
+
+           Dictionary<string, double> Deptor = new Dictionary<string, double>{{name,totaldebits}};
+            return Deptor;
         }
 
-        public string GetDeptor(string name)
-        {
-            string wanteddeptor = "";
-            foreach (var deptor in Deptors)
-            {
-                if (deptor == name)
-                {
-                    wanteddeptor = deptor;
-                }
-                else
-                    wanteddeptor = "The wanted deptor was not found";
-            }
-            return wanteddeptor;
+        //public string GetDeptor(string name)
+        //{
+        //    string wanteddeptor = "";
+        //    foreach (var deptor in Deptors)
+        //    {
+        //        if (deptor == name)
+        //        {
+        //            wanteddeptor = deptor;
+        //        }
+        //        else
+        //            wanteddeptor = "The wanted deptor was not found";
+        //    }
+        //    return wanteddeptor;
 
-        }
+        //}
+
+       public void AllDeptors()
+       {
+          
+          foreach (var d in Deptors)
+          {
+
+             ListOfAllDeptors.Add(GetDeptorAnTotaldDebit(d));
+          }
+       }
     }
 }
