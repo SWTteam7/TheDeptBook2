@@ -12,23 +12,28 @@
     <Grid>
         <Button x:Name="BtnAdd" Content="Add" HorizontalAlignment="Left" Margin="358,46,0,0" VerticalAlignment="Top" Width="113" Height="35" Command="{Binding AddDeptorCommand,Mode=OneTime}" />
         <Label x:Name="LabelDeptors" Content="Deptors" HorizontalAlignment="Left" Margin="50,20,0,0" VerticalAlignment="Top"/>
-        <ListView x:Name="listView" HorizontalAlignment="Left" Height="332" Margin="50,51,0,0" VerticalAlignment="Top" Width="233" SelectedItem="{Binding SelctedItem}"
-                  ItemsSource="{Binding Deptors}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Height="110" Margin="6">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="10,0,0,0">
-                            <TextBlock Text="{Binding Name}"  TextWrapping="NoWrap"/>
-                            <TextBlock Text="{Binding Value}"  TextWrapping="NoWrap"/>
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <Grid Margin="50,51,248,36">
+            <ListView x:Name="listView" HorizontalAlignment="Left" Height="332" VerticalAlignment="Top" Width="233" SelectedItem="{Binding SelctedItem}"
+                ItemsSource="{Binding Deptors}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="219">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="170*"/>
+                                <ColumnDefinition Width="49*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" VerticalAlignment="Top" Margin="10,0,0,0" Height="32">
+                                <TextBlock Text="{Binding Key}"  TextWrapping="NoWrap" HorizontalAlignment="Left"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="0,0,10,0" Height="32">
+                                <TextBlock Text="{Binding Value}"  TextWrapping="NoWrap" HorizontalAlignment="Right"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </Grid>
 
     </Grid>
 </Window>

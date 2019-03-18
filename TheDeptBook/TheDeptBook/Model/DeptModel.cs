@@ -35,7 +35,7 @@ namespace TheDeptBook.Model
             Deptors.Add(deptor);
             list.Add(new Dictionary<DateTime, double>{{DateTime.Now,debit}});
             Depts.Add(deptor, list);
-            
+           AllDeptors();
       }
 
         public void AddNewDebit(string name, double debit)
@@ -43,6 +43,7 @@ namespace TheDeptBook.Model
             List<Dictionary<DateTime,double>> deptlist;
             Depts.TryGetValue(name, out deptlist);
             deptlist.Add(new Dictionary<DateTime, double>{{DateTime.Now, debit}});
+            
         }
 
         public Dictionary<string,double> GetDeptorAnTotaldDebit(string name)
@@ -57,8 +58,8 @@ namespace TheDeptBook.Model
                 {
                     
                 }
-                dept.TryGetValue()
-                totaldebits += dept;
+                //dept.TryGetValue()
+                //totaldebits += dept;
             }
 
            Dictionary<string, double> Deptor = new Dictionary<string, double>{{name,totaldebits}};

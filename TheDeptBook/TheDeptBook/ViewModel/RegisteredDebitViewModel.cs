@@ -15,10 +15,13 @@ namespace TheDeptBook.ViewModel
    {
       private DeptModel _deptModel;
       private INavigateService _navigate;
-      public RegisteredDebitViewModel(DeptModel deptModel,INavigateService nav)
+      private string _selectedItem;
+
+      public RegisteredDebitViewModel(DeptModel deptModel,INavigateService nav, string selectedItem)
       {
          _deptModel = deptModel;
          _navigate = nav;
+         _selectedItem = selectedItem;
       }
 
       public event PropertyChangedEventHandler PropertyChanged;
@@ -31,10 +34,20 @@ namespace TheDeptBook.ViewModel
 
       public string Name
       {
-          get => _deptModel.Name;
+         get => _deptModel.Name;
+         set
+         {
+            _deptModel.Name = value;
+            OnPropertyChanged();
+         }
+      }
+
+      public DateTime Date
+      {
+          get => _deptModel.Date;
           set
           {
-              _deptModel.Name = value;
+              _deptModel.Date = value;
               OnPropertyChanged();
           }
       }
@@ -49,7 +62,7 @@ namespace TheDeptBook.ViewModel
           }
       }
 
-      public Dictionary<string, List<double>> Depts
+      public Dictionary<string, List<Dictionary<DateTime,double>>> Depts
       {
           get => _deptModel.Depts;
           set
@@ -58,32 +71,59 @@ namespace TheDeptBook.ViewModel
               OnPropertyChanged();
           }
       }
-      private ICommand _addDeptorCommand;
+
+      private ICommand _addDebitCommand;
 
       public ICommand AddDeptorCommand
       {
-          get { return _addDeptorCommand ?? (_addDeptorCommand = new RelayCommand(OpenAddDeptor)); }
+          get { return _addDebitCommand ?? (_addDebitCommand = new RelayCommand(AddValue)); }
 
       }
 
-      private void OpenAddDeptor()
-      {
-          
-      }
 
         public void ShowRegistredDepts(string name)
       {
-          List<double> deptlist;
-          _deptModel.Depts.TryGetValue(name, out deptlist);
+          //List<double> deptlist;
+          //_deptModel.Depts.TryGetValue(name, out deptlist);
           //vis deptlist i listview
 
       }
 
-      public void AddValue(double debit)
+      public void AddValue()
       {
-          string namefromview="";
+
+         List<Dictionary<DateTime, double>> ListdateValue = new List<Dictionary<DateTime, double>>();
+         Dictionary<DateTime, double> dateValue=new Dictionary<DateTime, double>();
+
           //get name fra der hvor der er klikket på main
-          _deptModel.AddNewDebit(namefromview, debit);
+          _deptModel.AddNewDebit(Name, Debit);
+
+         dateValue.Add(Date,Debit);
+         ListdateValue.Add(dateValue);
+
+         Depts.Add(Name,ListdateValue);
+      }
+
+      private ICommand _closeCommand;
+
+      public ICommand CloseCommand
+      {
+         get
+         {
+            if (_closeCommand == null)
+            {
+               _closeCommand = new RelayCommand(CloseAddDeptor);
+
+            }
+
+            return _closeCommand;
+         }
+      }
+
+
+      private void CloseAddDeptor()
+      {
+         _navigate.close(this);
       }
    }
 }

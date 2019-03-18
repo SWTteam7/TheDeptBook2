@@ -29,6 +29,15 @@ namespace TheDeptBook.ViewModel
       {
          _deptModel = deptModel;
          _navigationService = navService;
+         Dictionary<string, double> dept=new Dictionary<string, double>();
+         dept.Add("Emma",25.0);
+         dept.Add("Christiane Nørkjær Svensen",-100);
+
+         
+         List<Dictionary<string, double>> bla = new List<Dictionary<string, double>>();
+         bla.Add(dept);
+
+         Deptors = bla;
       }
 
       public string Name
@@ -62,26 +71,11 @@ namespace TheDeptBook.ViewModel
 
       }
 
-      public Dictionary<string, List<double>> SelectedItem
-      {
-         get => _deptModel.Depts;
-         set
-         {
-            _deptModel.Depts = value;
-            OnPropertyChanged();
-         }
-      }
+      public string SelectedItem { get; set; }
+      
 
-      //public Dictionary<string, List<double>> Depts
-      //{
-      //    get => _deptModel.Depts;
-      //    set
-      //    {
-      //        _deptModel.Depts = value;
-      //        OnPropertyChanged();
-      //    }
-      //}
-        private ICommand _addDeptorCommand;
+      
+      private ICommand _addDeptorCommand;
 
       public ICommand AddDeptorCommand
       {
@@ -104,7 +98,7 @@ namespace TheDeptBook.ViewModel
 
       private void OpenRegistredDebits()
       {
-         _navigationService.show(new RegisteredDebitViewModel(_deptModel,_navigationService));
+         _navigationService.show(new RegisteredDebitViewModel(_deptModel,_navigationService, SelectedItem));
       }
 
       //private ICommand _showDepts;
@@ -116,8 +110,6 @@ namespace TheDeptBook.ViewModel
       // }
        private void GetDepts()
        {
-           
-       
            var Depts =_deptModel.Depts;
            OnPropertyChanged("Depts");
        }
