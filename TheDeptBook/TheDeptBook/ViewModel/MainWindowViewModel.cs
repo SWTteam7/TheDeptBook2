@@ -40,13 +40,12 @@ namespace TheDeptBook.ViewModel
          get => DeptorsToShow;
          set
          {
-            //DeptorsToShow = value;
-            //OnPropertyChanged();
+           
          }
       }
 
 
-      public string SelectedItem { get; set; }
+      public int SelectedItem { get; set; }
       
 
       
@@ -73,7 +72,8 @@ namespace TheDeptBook.ViewModel
 
       private void OpenRegistredDebits()
       {
-         _navigationService.show(new RegisteredDebitViewModel(_deptModel,_navigationService, SelectedItem));
+         DeptorObject Deptor = DeptorsToShow[SelectedItem];
+         _navigationService.show(new RegisteredDebitViewModel(_deptModel,_navigationService, Deptor));
       }
 
       private ICommand _updateCommand;

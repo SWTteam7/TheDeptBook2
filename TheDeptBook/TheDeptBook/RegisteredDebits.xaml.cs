@@ -17,11 +17,11 @@ namespace TheDeptBook
    /// <summary>
    /// Interaction logic for Registered_debits.xaml
    /// </summary>
-   public partial class Registered_debits : Window
+   public partial class RegisteredDebits : Window
    {
-      public Registered_debits()
+      public RegisteredDebits()
       {
-         //InitializeComponent();
+         InitializeComponent();
       }
    }
 }

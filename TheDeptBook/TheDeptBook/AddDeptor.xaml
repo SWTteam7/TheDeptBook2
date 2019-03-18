@@ -6,8 +6,7 @@
         xmlns:local="clr-namespace:TheDeptBook"
         xmlns:viewModel="clr-namespace:TheDeptBook.ViewModel"
         mc:Ignorable="d"
-        Title="Add Deptor" Height="249" Width="316.25"
-        DataContext ="{Binding Source={StaticResource ViewModelLocater},Path=AddDeptorViewModel}">
+        Title="Add Deptor" Height="249" Width="316.25">
     
     <Grid>
         <Grid.ColumnDefinitions>

@@ -6,30 +6,23 @@
         xmlns:local="clr-namespace:TheDeptBook"
         xmlns:viewModel="clr-namespace:TheDeptBook.ViewModel"
         mc:Ignorable="d"
-        Title="Registered debits" Height="357" Width="395"
-        DataContext ="{Binding Source={StaticResource ViewModelLocater},Path=RegisteredDebitViewModel}">
+        Title="Registered debits" Height="357" Width="469.554">
 
     <Grid>
-        <TextBox x:Name="TxtValue" HorizontalAlignment="Left" Height="23" Margin="233,34,0,0" TextWrapping="Wrap" Text="Value" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="TtnAddValue" Content="Add value" HorizontalAlignment="Left" Margin="233,82,0,0" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="Btnlose" Content="Close" HorizontalAlignment="Left" Margin="233,280,0,0" VerticalAlignment="Top" Width="120"/>
-        <ListView x:Name="listView" HorizontalAlignment="Left" Height="266" Margin="34,34,0,0" VerticalAlignment="Top" Width="139" SelectedItem="{Binding SelctedItem}"
-                  ItemsSource="{Binding Depts}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Height="110" Margin="6">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="10,0,0,0">
-                            <TextBlock Text="{Binding Date}"  TextWrapping="NoWrap"/>
-                            <TextBlock Text="{Binding Debit}"  TextWrapping="NoWrap"/>
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+        <TextBox x:Name="TxtValue" HorizontalAlignment="Left" Height="23" Margin="316,34,0,0" TextWrapping="Wrap" Text="{Binding Path=Debit,StringFormat=F1,Mode=TwoWay}" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="TtnAddValue" Content="Add value" HorizontalAlignment="Left" Margin="316,82,0,0" VerticalAlignment="Top" Width="120" Command="{Binding AddDebitCommand,Mode = OneTime}"/>
+        <Button x:Name="Btnlose" Content="Close" HorizontalAlignment="Left" Margin="316,280,0,0" VerticalAlignment="Top" Width="120" Command="{Binding CloseCommand,Mode=OneTime}"/>
+        <ListView x:Name="listView" HorizontalAlignment="Left" Height="266" Margin="10,34,0,0" VerticalAlignment="Top" Width="250" ItemsSource="{Binding Debits}">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Width="150" Header="Date" DisplayMemberBinding="{Binding Path=Dt}"/>
+                        <GridViewColumn Width="100" Header="Debit" DisplayMemberBinding="{Binding Path=Debit}"/>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
         </ListView>
+
 
     </Grid>
 </Window>

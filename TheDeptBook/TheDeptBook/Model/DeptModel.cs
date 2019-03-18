@@ -24,11 +24,6 @@ namespace TheDeptBook.Model
         {
             DeptorsNames = new List<string>();
             ListOfAllDeptors = new List<DeptorObject>();
-           List<DebitObject> d = new List<DebitObject>();
-           d.Add(new DebitObject(DateTime.Now,12));
-           d.Add(new DebitObject(DateTime.Now,100));
-           ListOfAllDeptors.Add(new DeptorObject("Hans",d,0));
-           
         }
 
         public void AddNewDeptor(string name, double debit)
@@ -79,22 +74,7 @@ namespace TheDeptBook.Model
         }
 
        
-
-        //public string GetDeptor(string name)
-        //{
-        //    string wanteddeptor = "";
-        //    foreach (var deptor in Deptors)
-        //    {
-        //        if (deptor == name)
-        //        {
-        //            wanteddeptor = deptor;
-        //        }
-        //        else
-        //            wanteddeptor = "The wanted deptor was not found";
-        //    }
-        //    return wanteddeptor;
-
-        //}
+  
 
     }
 }

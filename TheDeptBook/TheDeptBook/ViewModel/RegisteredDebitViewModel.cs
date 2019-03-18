@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -15,13 +16,15 @@ namespace TheDeptBook.ViewModel
    {
       private IDeptModel _deptModel;
       private INavigateService _navigate;
-      private string _selectedItem;
+      private DeptorObject Deptor;
+      private ObservableCollection<DebitObject> DebitsToShow = new ObservableCollection<DebitObject>();
 
-      public RegisteredDebitViewModel(IDeptModel deptModel,INavigateService nav, string selectedItem)
+      public RegisteredDebitViewModel(IDeptModel deptModel,INavigateService nav, DeptorObject deptor)
       {
          _deptModel = deptModel;
          _navigate = nav;
-         _selectedItem = selectedItem;
+         Deptor = deptor;
+         ShowDebits();
       }
 
       public event PropertyChangedEventHandler PropertyChanged;
@@ -32,67 +35,59 @@ namespace TheDeptBook.ViewModel
          PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
       }
 
-      public string Name
+      public double Debit
       {
-         get => _deptModel.Name;
+         get => _deptModel.Debit;
          set
          {
-            _deptModel.Name = value;
+            _deptModel.Debit = value;
             OnPropertyChanged();
          }
       }
 
 
-      public double Debit
+
+      public ObservableCollection<DebitObject> Debits
       {
-          get => _deptModel.Debit;
-          set
-          {
-              _deptModel.Debit = value;
-              OnPropertyChanged();
-          }
+         get => DebitsToShow;
+         set
+         {
+            
+         }
       }
 
-      //public DeptorObject Depts
-      //{
-      //    get => _deptModel.ListOfAllDeptors;
-      //    set
-      //    {
-      //        _deptModel.Depts = value;
-      //        OnPropertyChanged();
-      //    }
-      //}
+     
+      public void ShowDebits()
+      {
+         if (DebitsToShow != null)
+         {
+            DebitsToShow.Clear();
+         }
+
+         foreach (DebitObject debit in Deptor.DebtList)
+         {
+            DebitsToShow.Add(debit);
+         }
+         OnPropertyChanged("Debits");
+
+      }
+
+
 
       private ICommand _addDebitCommand;
 
-      public ICommand AddDeptorCommand
+      public ICommand AddDebitCommand
       {
           get { return _addDebitCommand ?? (_addDebitCommand = new RelayCommand(AddValue)); }
 
       }
 
 
-        public void ShowRegistredDepts(string name)
-      {
-          //List<double> deptlist;
-          //_deptModel.Depts.TryGetValue(name, out deptlist);
-          //vis deptlist i listview
-
-      }
-
       public void AddValue()
       {
-
-         //List<Dictionary<DateTime, double>> ListdateValue = new List<Dictionary<DateTime, double>>();
-         //Dictionary<DateTime, double> dateValue=new Dictionary<DateTime, double>();
-
-         // //get name fra der hvor der er klikket på main
-         // _deptModel.AddNewDebit(Name, Debit);
-
-         //dateValue.Add(Date,Debit);
-         //ListdateValue.Add(dateValue);
-
-         //Depts.Add(Name,ListdateValue);
+         _deptModel.AddNewDebit(Deptor.Name,Debit);
+         ShowDebits();
+         Debit = 0.0;
       }
 
       private ICommand _closeCommand;
