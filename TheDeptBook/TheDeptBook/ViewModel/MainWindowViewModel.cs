@@ -60,7 +60,7 @@ namespace TheDeptBook.ViewModel
 
       private void OpenAddDeptor()
       {
-         _navigationService.show(new AddDeptorViewModel(_deptModel, _navigationService));
+         _navigationService.Show(new AddDeptorViewModel(_deptModel, _navigationService));
       }
 
 
@@ -73,23 +73,17 @@ namespace TheDeptBook.ViewModel
 
       private void OpenRegistredDebits()
       {
-         _navigationService.show(new RegisteredDebitViewModel(_deptModel,_navigationService, SelectedItem));
+         _navigationService.Show(new RegisteredDebitViewModel(_deptModel,_navigationService, SelectedItem));
       }
 
       private ICommand _updateCommand;
 
       public ICommand UpdateCommand
       {
-         get { return _updateCommand ?? (_updateCommand = new RelayCommand(UpdateList)); }
+         get { return _updateCommand ?? (_updateCommand = new RelayCommand(ShowDeptors)); }
       }
 
-      private void UpdateList()
-      {
-         ShowDeptors();
-         
-        
-      }
-
+     
       public void ShowDeptors()
       {
          if (DeptorsToShow != null)
@@ -100,7 +94,7 @@ namespace TheDeptBook.ViewModel
          foreach (DeptorObject deptor in _deptModel.ListOfAllDeptors)
          {
             string name = deptor.Name;
-            List<DebitObject> debits = deptor.DebtList;
+            List<DebitObject> debits = deptor.DebitList;
             double totalDebit = _deptModel.GetTotalDebit(name);
 
             DeptorObject d = new DeptorObject(name,debits, totalDebit);

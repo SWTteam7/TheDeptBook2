@@ -12,7 +12,7 @@ namespace TheDeptBook.Model
         double Debit { get; set; }
 
         
-        List<string> DeptorsNames { get; set; }
+   
         List<DeptorObject> ListOfAllDeptors { get; set; }
         
 

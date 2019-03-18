@@ -10,7 +10,7 @@ namespace TheDeptBook
 {
    public interface INavigateService
    {
-      void show(IViewModel viewModel);
-      void close(IViewModel viewModel);
+      void Show(IViewModel viewModel);
+      void Close(IViewModel viewModel);
    }
 }
