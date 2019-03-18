@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace TheDeptBook.Model
 {
@@ -45,23 +46,20 @@ namespace TheDeptBook.Model
             deptlist.Add(new Dictionary<DateTime, double>{{DateTime.Now, debit}});
         }
 
-        public Dictionary<string,double> GetDeptorAnTotaldDebit(string name)
+        public Dictionary<string, double> GetDeptorAnTotaldDebit(string name)
         {
             double totaldebits = 0;
             List<Dictionary<DateTime, double>> deptlist;
             Depts.TryGetValue(name, out deptlist);
-            
             foreach (var dept in deptlist)
             {
-                foreach (var date in dept)
+                foreach (KeyValuePair<DateTime, double> date in dept)
                 {
-                    
+                    double debit = date.Value;
+                    totaldebits += debit;
                 }
-                dept.TryGetValue()
-                totaldebits += dept;
             }
-
-           Dictionary<string, double> Deptor = new Dictionary<string, double>{{name,totaldebits}};
+            Dictionary<string, double> Deptor = new Dictionary<string, double>{{name,totaldebits}};
             return Deptor;
         }
 
