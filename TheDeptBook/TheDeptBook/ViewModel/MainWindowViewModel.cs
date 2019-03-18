@@ -25,7 +25,7 @@ namespace TheDeptBook.ViewModel
          PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
       }
 
-      public MainWindowViewModel(DeptModel deptModel, INavigateService navService)
+      public MainWindowViewModel(IDeptModel deptModel, INavigateService navService)
       {
          _deptModel = deptModel;
          _navigationService = navService;

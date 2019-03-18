@@ -15,9 +15,9 @@ namespace TheDeptBook.Model
         public DateTime Date { get; set; }
 
         public Dictionary<string, List<Dictionary<DateTime,double>>> Depts { get; set; }
-        public List<string> Deptors { get; private set; }
+        public List<string> Deptors { get;  set; }
 
-       public List<Dictionary<string, double>> ListOfAllDeptors { get; set; }
+        public List<Dictionary<string, double>> ListOfAllDeptors { get; set; }
 
    
 
@@ -85,7 +85,7 @@ namespace TheDeptBook.Model
           foreach (var d in Deptors)
           {
 
-             ListOfAllDeptors.Add(GetDeptorAnTotaldDebit(d));
+             ListOfAllDeptors.Add(GetDeptorAndTotalDebit(d));
           }
        }
     }
