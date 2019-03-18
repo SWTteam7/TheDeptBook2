@@ -13,7 +13,7 @@ namespace TheDeptBook.ViewModel
 {
    public class RegisteredDebitViewModel: INotifyPropertyChanged,IViewModel
    {
-      private DeptModel _deptModel;
+      private IDeptModel _deptModel;
       private INavigateService _navigate;
       private string _selectedItem;
 

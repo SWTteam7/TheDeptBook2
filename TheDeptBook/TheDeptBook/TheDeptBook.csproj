@@ -55,6 +55,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="INavigateService.cs" />
+    <Compile Include="Model\IDeptModel.cs" />
     <Compile Include="NavigateService.cs" />
     <Compile Include="ViewModelLocater.cs" />
     <Compile Include="Model\DeptModel.cs" />

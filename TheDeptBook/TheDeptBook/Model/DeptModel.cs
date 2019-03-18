@@ -4,19 +4,20 @@ using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace TheDeptBook.Model
 {
-    public class DeptModel
+    public class DeptModel: IDeptModel
     {
         public string Name { get; set; }
         public double Debit { get;  set; }
         public DateTime Date { get; set; }
 
         public Dictionary<string, List<Dictionary<DateTime,double>>> Depts { get; set; }
-        public List<string> Deptors { get; private set; }
+        public List<string> Deptors { get;  set; }
 
-       public List<Dictionary<string, double>> ListOfAllDeptors { get; set; }
+        public List<Dictionary<string, double>> ListOfAllDeptors { get; set; }
 
    
 
@@ -35,7 +36,7 @@ namespace TheDeptBook.Model
             Deptors.Add(deptor);
             list.Add(new Dictionary<DateTime, double>{{DateTime.Now,debit}});
             Depts.Add(deptor, list);
-           AllDeptors();
+            
       }
 
         public void AddNewDebit(string name, double debit)
@@ -43,26 +44,22 @@ namespace TheDeptBook.Model
             List<Dictionary<DateTime,double>> deptlist;
             Depts.TryGetValue(name, out deptlist);
             deptlist.Add(new Dictionary<DateTime, double>{{DateTime.Now, debit}});
-            
         }
 
-        public Dictionary<string,double> GetDeptorAnTotaldDebit(string name)
+        public Dictionary<string, double> GetDeptorAndTotalDebit(string name)
         {
             double totaldebits = 0;
             List<Dictionary<DateTime, double>> deptlist;
             Depts.TryGetValue(name, out deptlist);
-            
             foreach (var dept in deptlist)
             {
-                foreach (var date in dept)
+                foreach (KeyValuePair<DateTime, double> date in dept)
                 {
-                    
+                    double debit = date.Value;
+                    totaldebits += debit;
                 }
-                //dept.TryGetValue()
-                //totaldebits += dept;
             }
-
-           Dictionary<string, double> Deptor = new Dictionary<string, double>{{name,totaldebits}};
+            Dictionary<string, double> Deptor = new Dictionary<string, double>{{name,totaldebits}};
             return Deptor;
         }
 
@@ -88,7 +85,7 @@ namespace TheDeptBook.Model
           foreach (var d in Deptors)
           {
 
-             ListOfAllDeptors.Add(GetDeptorAnTotaldDebit(d));
+             ListOfAllDeptors.Add(GetDeptorAndTotalDebit(d));
           }
        }
     }

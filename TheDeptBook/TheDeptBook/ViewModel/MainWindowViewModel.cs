@@ -13,7 +13,7 @@ namespace TheDeptBook.ViewModel
 {
    public class MainWindowViewModel : INotifyPropertyChanged,IViewModel
    {
-      private readonly DeptModel _deptModel;
+      private readonly IDeptModel _deptModel;
       private readonly INavigateService _navigationService;
      
 
@@ -25,7 +25,7 @@ namespace TheDeptBook.ViewModel
          PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
       }
 
-      public MainWindowViewModel(DeptModel deptModel, INavigateService navService)
+      public MainWindowViewModel(IDeptModel deptModel, INavigateService navService)
       {
          _deptModel = deptModel;
          _navigationService = navService;
