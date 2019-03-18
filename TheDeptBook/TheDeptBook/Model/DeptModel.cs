@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace TheDeptBook.Model
 {
-    public class DeptModel
+    public class DeptModel: IDeptModel
     {
         public string Name { get; set; }
         public double Debit { get;  set; }
@@ -46,7 +46,7 @@ namespace TheDeptBook.Model
             deptlist.Add(new Dictionary<DateTime, double>{{DateTime.Now, debit}});
         }
 
-        public Dictionary<string, double> GetDeptorAnTotaldDebit(string name)
+        public Dictionary<string, double> GetDeptorAndTotalDebit(string name)
         {
             double totaldebits = 0;
             List<Dictionary<DateTime, double>> deptlist;

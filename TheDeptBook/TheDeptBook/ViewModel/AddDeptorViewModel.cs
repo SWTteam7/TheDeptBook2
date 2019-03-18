@@ -14,7 +14,7 @@ namespace TheDeptBook.ViewModel
 {
    public class AddDeptorViewModel: INotifyPropertyChanged,IViewModel
    {
-      private DeptModel _deptModel;
+      private IDeptModel _deptModel;
       private INavigateService _navigate;
 
       public event PropertyChangedEventHandler PropertyChanged;
