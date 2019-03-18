@@ -11,8 +11,9 @@ namespace TheDeptBook.Model
     {
         public string Name { get; set; }
         public double Debit { get;  set; }
+        public DateTime Date { get; set; }
 
-        public Dictionary<string, List<double>> Depts { get; set; }
+        public Dictionary<string, List<Dictionary<DateTime,double>>> Depts { get; set; }
         public List<string> Deptors { get; private set; }
 
        public List<Dictionary<string, double>> ListOfAllDeptors { get; set; }
@@ -22,7 +23,7 @@ namespace TheDeptBook.Model
         public DeptModel()
         {
             Deptors = new List<string>();
-            Depts = new Dictionary<string, List<double>>();
+            Depts = new Dictionary<string, List<Dictionary<DateTime,double>>>();
         }
 
         public void AddNewDeptor(string name, double debit)
@@ -30,27 +31,33 @@ namespace TheDeptBook.Model
 
             string deptor = name;
 
-            var list = new List<double>();
+            var list = new List<Dictionary<DateTime,double>>();
             Deptors.Add(deptor);
-            list.Add(debit);
+            list.Add(new Dictionary<DateTime, double>{{DateTime.Now,debit}});
             Depts.Add(deptor, list);
-           
+            
       }
 
         public void AddNewDebit(string name, double debit)
-        {
-            List<double> deptlist;
+        {   
+            List<Dictionary<DateTime,double>> deptlist;
             Depts.TryGetValue(name, out deptlist);
-            deptlist.Add(debit);
+            deptlist.Add(new Dictionary<DateTime, double>{{DateTime.Now, debit}});
         }
 
         public Dictionary<string,double> GetDeptorAnTotaldDebit(string name)
         {
             double totaldebits = 0;
-            List<double> deptlist;
+            List<Dictionary<DateTime, double>> deptlist;
             Depts.TryGetValue(name, out deptlist);
+            
             foreach (var dept in deptlist)
             {
+                foreach (var date in dept)
+                {
+                    
+                }
+                dept.TryGetValue()
                 totaldebits += dept;
             }
 
