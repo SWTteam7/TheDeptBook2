@@ -45,7 +45,7 @@ namespace TheDeptBook.ViewModel
          }
       }
 
-      public double InitValue
+      public double Debit
       {
          get => _deptModel.Debit;
          set
@@ -78,7 +78,7 @@ namespace TheDeptBook.ViewModel
 
       private void SaveDeptor()
       {
-         _deptModel.AddNewDeptor(Name,InitValue);
+         _deptModel.AddNewDeptor(Name,Debit);
          CloseAddDeptor();
          
       }
@@ -104,7 +104,7 @@ namespace TheDeptBook.ViewModel
       {
          _navigate.Close(this);
          Name = "";
-         InitValue = 0.0;
+         Debit = 0.0;
       }
 
    }
